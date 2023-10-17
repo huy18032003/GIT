@@ -27,3 +27,22 @@ export const getAll = async (req, res) => {
         });
     }
 };
+export const getOneProduct = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = await Products.findById(id)
+        if (data.length === 0) {
+            return res.status(200).json({
+                message: "Không có sản phẩm"
+            });
+        }
+        return res.status(200).json({
+            message: "Lấy 1 sản phẩm thành công!",
+            data
+        })
+    } catch (error) {
+        return res.status(400).json({
+            message: error.message
+        });
+    }
+};
